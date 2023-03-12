@@ -39,6 +39,20 @@ const createWorkout = async (req, res) => {
 };
 
 // delete a workout
+const deleteWorkout = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).json({ error: "No workout with that id" });
+
+  const workout = await Workout.findOneAndDelete({ _id: id });
+
+  if (!workout) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
+
+  res.status(200).json(workout);
+};
 
 // update a workout
 
@@ -46,6 +60,6 @@ module.exports = {
   getAllWorkouts,
   getWorkout,
   createWorkout,
-  //   deleteWorkout,
+  deleteWorkout,
   //   updateWorkout,
 };
