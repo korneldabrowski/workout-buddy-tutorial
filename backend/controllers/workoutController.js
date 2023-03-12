@@ -1,6 +1,11 @@
 const Workout = require("../models/workoutModel");
 
 // get all workouts
+const getAllWorkouts = async (req, res) => {
+  const workouts = await Workout.find({}).sort({ createdAt: -1 });
+
+  res.status(200).json(workouts);
+};
 
 // get a Single workout
 
@@ -23,7 +28,7 @@ const createWorkout = async (req, res) => {
 // update a workout
 
 module.exports = {
-  //   getAllWorkouts,
+  getAllWorkouts,
   //   getWorkout,
   createWorkout,
   //   deleteWorkout,
