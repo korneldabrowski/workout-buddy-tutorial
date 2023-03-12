@@ -1,4 +1,5 @@
 const Workout = require("../models/workoutModel");
+const mongoose = require("mongoose");
 
 // get all workouts
 const getAllWorkouts = async (req, res) => {
@@ -8,6 +9,20 @@ const getAllWorkouts = async (req, res) => {
 };
 
 // get a Single workout
+const getWorkout = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No workout with that id");
+
+  const workout = await Workout.findById(id);
+
+  if (!workout) {
+    return res.status(404).json({ error: "Workout not found" });
+  }
+
+  res.status(200).json(workout);
+};
 
 // create a new workout
 
@@ -29,7 +44,7 @@ const createWorkout = async (req, res) => {
 
 module.exports = {
   getAllWorkouts,
-  //   getWorkout,
+  getWorkout,
   createWorkout,
   //   deleteWorkout,
   //   updateWorkout,
