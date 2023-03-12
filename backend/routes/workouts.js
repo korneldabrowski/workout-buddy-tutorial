@@ -18,16 +18,11 @@ router.post("/", async (req, res) => {
   const { title, load, reps } = req.body;
 
   try {
-    const workout = await Workout.create({
-      title,
-      load,
-      reps,
-    });
-    res.status(201).json({ workout });
+    const workout = await Workout.create({ title, load, reps });
+    res.status(201).json(workout);
   } catch (error) {
-    res.status(400).json({ message: "Error", error });
+    res.status(400).json({ error: error.message });
   }
-  res.json({ message: "POST new workout" });
 });
 
 // DELETE a workout
