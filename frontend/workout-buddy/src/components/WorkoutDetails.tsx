@@ -12,7 +12,7 @@ const WorkoutDetails = (props: { workout: Workout }) => {
   const { title, reps, load, createdAt } = props.workout;
 
   return (
-    <div className="card w-96 bg-primary shadow-xl">
+    <div className="card h-48  bg-primary shadow-xl my-4">
       <div className="card-body text-lg text-primary-content">
         <h3 className="text-4xl font-bold">{title}</h3>
         <p>

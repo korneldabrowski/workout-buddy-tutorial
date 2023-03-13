@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import WorkoutDetails from "../components/WorkoutDetails";
+import WorkoutForm from "../components/WorkoutForm";
 
 interface Workout {
   _id: string;
@@ -25,12 +26,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <div className="mt-4">
+    <div className="flex flex-col sm:flex-row">
+      <div className=" my-4 grid sm:grid-cols-3 gap-x-10  ">
         {workouts.length >= 1 &&
           workouts.map((workout) => (
             <WorkoutDetails key={workout._id} workout={workout} />
           ))}
+      </div>
+      <div className="ml-auto">
+        <WorkoutForm />
       </div>
     </div>
   );
