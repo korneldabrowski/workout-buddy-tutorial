@@ -1,7 +1,16 @@
 import { useState, useEffect } from "react";
+import WorkoutDetails from "../components/WorkoutDetails";
+
+interface Workout {
+  _id: string;
+  title: string;
+  reps: number;
+  load: number;
+  createdAt: string;
+}
 
 const Home = () => {
-  const [workouts, setWorkouts] = useState(null);
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,13 +26,10 @@ const Home = () => {
 
   return (
     <div>
-      <div>
-        xd
-        {workouts &&
+      <div className="mt-4">
+        {workouts.length >= 1 &&
           workouts.map((workout) => (
-            <div key={workout._id}>
-              <h3>{workout.title}</h3>
-            </div>
+            <WorkoutDetails key={workout._id} workout={workout} />
           ))}
       </div>
     </div>
