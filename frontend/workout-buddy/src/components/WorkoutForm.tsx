@@ -8,13 +8,15 @@ const WorkoutForm = () => {
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const workout = { title, reps, load };
+
     try {
       const res = await fetch("http://localhost:3000/api/workouts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, reps, load }),
+        body: JSON.stringify(workout),
       });
     } catch (err) {
       console.log(err);
